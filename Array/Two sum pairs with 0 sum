@@ -1,0 +1,38 @@
+
+class Solution {
+  public:
+    vector<vector<int>> getPairs(vector<int>& arr) {
+       vector<vector<int>> result;
+        int n = arr.size();
+        
+        sort(arr.begin(), arr.end());
+        
+        int left = 0, right = n - 1;
+        
+        while(left < right) {
+            int sum = arr[left] + arr[right];
+            
+            if(sum == 0) {
+                result.push_back({arr[left], arr[right]});
+                
+                int l = arr[left];
+                int r = arr[right];
+                
+                // Skip duplicates
+                while(left < right && arr[left] == l) left++;
+                while(left < right && arr[right] == r) right--;
+            }
+            else if(sum < 0) {
+                left++;
+            }
+            else {
+                right--;
+            }
+        }
+        
+        return result;
+    }
+};
+
+// T.C=O(n logn) due to sorting
+// S.C=O(1)
