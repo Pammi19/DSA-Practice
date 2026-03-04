@@ -1,0 +1,34 @@
+/* struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};*/
+
+class Solution {
+  public:
+    int getKthFromLast(Node* head, int k) {
+         Node* first = head;
+        Node* second = head;
+        
+        // Move first pointer k steps ahead
+        for(int i = 0; i < k; i++) {
+            if(first == NULL)
+                return -1;   // If k is greater than length
+            first = first->next;
+        }
+        
+        // Move both pointers until first reaches end
+        while(first != NULL) {
+            first = first->next;
+            second = second->next;
+        }
+        
+        return second->data;
+    }
+};
+
+//T.C=O(n)
+//S.C=O(1)
