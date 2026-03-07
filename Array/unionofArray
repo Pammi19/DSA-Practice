@@ -1,0 +1,35 @@
+
+
+int cmp(const void *x, const void *y)
+{
+    return (*(int*)x - *(int*)y);
+}
+
+int* findUnion(int* a, int n, int* b, int m, int* returnSize) {
+
+    int *temp = (int*)malloc((n+m)*sizeof(int));
+
+    for(int i=0;i<n;i++)
+        temp[i] = a[i];
+
+    for(int i=0;i<m;i++)
+        temp[n+i] = b[i];
+
+    int size = n+m;
+
+    // sort array
+    qsort(temp, size, sizeof(int), cmp);
+
+    int *res = (int*)malloc(size*sizeof(int));
+    int k = 0;
+
+    for(int i=0;i<size;i++)
+    {
+        if(i==0 || temp[i] != temp[i-1])
+            res[k++] = temp[i];
+    }
+
+    *returnSize = k;
+    return res;
+}
+//Time Complexity=O((n+m) log(n+m))
