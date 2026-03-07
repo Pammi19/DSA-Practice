@@ -1,0 +1,54 @@
+
+
+bool dfs(int v, int V, int adj[V][V], bool visited[], bool rec[])
+{
+    visited[v] = true;
+    rec[v] = true;
+
+    for(int i = 0; i < V; i++)
+    {
+        if(adj[v][i])
+        {
+            if(!visited[i] && dfs(i, V, adj, visited, rec))
+                return true;
+            else if(rec[i])
+                return true;
+        }
+    }
+
+    rec[v] = false;
+    return false;
+}
+
+bool isCyclic(int V, int E, int edges[][2]) 
+{
+    int adj[V][V];
+
+    for(int i=0;i<V;i++)
+        for(int j=0;j<V;j++)
+            adj[i][j]=0;
+
+    for(int i=0;i<E;i++)
+    {
+        int u = edges[i][0];
+        int v = edges[i][1];
+        adj[u][v] = 1;   // directed edge
+    }
+
+    bool visited[V];
+    bool rec[V];
+
+    for(int i=0;i<V;i++)
+    {
+        visited[i]=false;
+        rec[i]=false;
+    }
+
+    for(int i=0;i<V;i++)
+        if(!visited[i] && dfs(i,V,adj,visited,rec))
+            return true;
+
+    return false;
+}
+
+//T.C=O(V+E)
