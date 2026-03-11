@@ -1,0 +1,21 @@
+#include <algorithm>
+
+class Solution {
+public:
+    int missingNumber(vector<int> &arr) {
+        sort(arr.begin(), arr.end());
+
+        int missing = 1;
+
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr[i] == missing) {
+                missing++;
+            }
+        }
+
+        return missing;
+    }
+};
+
+//T.C=O(nlogn)   bcz of sorting  sort() is O(nlogn)
+//S.C=0(1)
