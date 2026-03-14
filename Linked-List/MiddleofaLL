@@ -1,0 +1,16 @@
+class Solution {
+  public:
+    int getMiddle(Node* head) {
+        Node* slow = head;
+        Node* fast = head;
+        
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        return slow->data;
+    }
+};
+
+//T.C=O(n) and S.C=(1)
