@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    Node *insertAtEnd(Node *head, int x) {
+        // Step 1: Create new node
+        Node* newNode = new Node(x);
+
+        // Step 2: If list is empty
+        if (head == NULL) {
+            return newNode;
+        }
+
+        // Step 3: Traverse to last node
+        Node* temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+
+        // Step 4: Insert at end
+        temp->next = newNode;
+
+        // Step 5: Return head
+        return head;
+    }
+};
