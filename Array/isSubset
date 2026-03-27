@@ -19,3 +19,5 @@ class Solution {
         return true;
     }
 };
+Time: O(n + m)
+Space: O(n)
