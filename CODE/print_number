@@ -1,0 +1,11 @@
+class Solution {
+  public:
+    void printNos(int n) {
+        if (n == 0) return;   // Base case
+        
+        printNos(n - 1);      // Recursive call
+        cout << n << " ";     // Print after recursion
+    }
+};
+T.C=O(n)
+S.C=O(n)
