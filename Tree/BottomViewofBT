@@ -1,0 +1,41 @@
+class Solution {
+  public:
+    vector<int> bottomView(Node *root) {
+        vector<int> result;
+        if (root == NULL) return result;
+
+        // Map to store HD -> node value
+        map<int, int> mp;
+
+        // Queue for BFS: stores node + its HD
+        queue<pair<Node*, int>> q;
+        q.push({root, 0});
+
+        while (!q.empty()) {
+            auto temp = q.front();
+            q.pop();
+
+            Node* node = temp.first;
+            int hd = temp.second;
+
+            // Overwrite value (important for bottom view)
+            mp[hd] = node->data;
+
+            if (node->left)
+                q.push({node->left, hd - 1});
+
+            if (node->right)
+                q.push({node->right, hd + 1});
+        }
+
+        // Store result from map (sorted by HD)
+        for (auto it : mp) {
+            result.push_back(it.second);
+        }
+
+        return result;
+    }
+};
+
+Time: O(N log N) (because of map)
+Space: O(N)
