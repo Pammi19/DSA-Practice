@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    // Function to remove duplicates from sorted linked list.
+    Node* removeDuplicates(Node* head) {
+        if (!head) return nullptr; // empty list
+
+        Node* current = head;
+
+        while (current->next != nullptr) {
+            if (current->data == current->next->data) {
+                // Duplicate found, remove next node
+                Node* temp = current->next;
+                current->next = current->next->next;
+                delete temp; // free memory
+            } else {
+                current = current->next; // move forward if no duplicate
+            }
+        }
+
+        return head;
+    }
+};
