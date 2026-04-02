@@ -1,0 +1,54 @@
+class Node {
+    int data;
+    Node* next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+class Solution {
+  public:
+    Node* rotate(Node* head, int k) {
+        if (head == NULL || k == 0)
+            return head;
+
+        // Step 1: Find length
+        Node* curr = head;
+        int len = 1;
+        while (curr->next != NULL) {
+            curr = curr->next;
+            len++;
+        }
+
+        // Step 2: Adjust k
+        k = k % len;
+        if (k == 0)
+            return head;
+
+        // Step 3: Go to kth node
+        curr = head;
+        for (int i = 1; i < k; i++) {
+            curr = curr->next;
+        }
+
+        Node* kthNode = curr;
+        Node* newHead = kthNode->next;
+
+        // Step 4: Break link
+        kthNode->next = NULL;
+
+        // Step 5: Go to last of remaining list
+        Node* temp = newHead;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+
+        // Step 6: Attach old head
+        temp->next = head;
+
+        return newHead;
+    }
+};
+Time Complexity: O(n)
+Space Complexity: O(1)
